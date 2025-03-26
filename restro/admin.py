@@ -2,10 +2,6 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-
-
-admin.site.register(Table)
-admin.site.register(Order)
 admin.site.register(order_item)
 
 @admin.register(Category)
@@ -17,3 +13,12 @@ class restro(admin.ModelAdmin):
 class foodadm(admin.ModelAdmin):
     list_display=("name",)    
 admin.site.register(Food, foodadm)
+  
+@admin.register(Table)
+class tableadm(admin.ModelAdmin):
+    list_display=("number",)
+    search_fields=("number",)
+    
+@admin.register(Order)
+class ordersdm(admin.ModelAdmin):
+    list_filter=("user","table_id", )
