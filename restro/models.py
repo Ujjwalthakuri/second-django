@@ -37,7 +37,7 @@ class Order(models.Model):
         complete:"complete",
     }
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    table_id = models.ForeignKey(Table, on_delete=models.CASCADE)
+    table_id = models.ForeignKey(Table, on_delete=models.CASCADE, null=True, blank=True)
     status = models.CharField(max_length=2, choices=status_choice, default= pending ) 
     payment_status = models.CharField(max_length=2, choices=payment_choice, default=pending)
     total_price = models.FloatField()

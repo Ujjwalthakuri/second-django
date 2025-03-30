@@ -1,6 +1,6 @@
 from django.urls import path
-# from .views import *
+from .views import *
 
 urlpatterns = [
-    # path('home', restro)
+    path('category_list/', category_list)
 ]

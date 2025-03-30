@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restro',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,8 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    
+    # postgress connection
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'restro',
@@ -90,6 +93,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432'
     }
+ 
 }
 
 
