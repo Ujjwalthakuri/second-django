@@ -6,32 +6,42 @@ from rest_framework import status
 from .models import *
 from .serializer import *
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView,ListCreateAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView,  RetrieveAPIView, UpdateAPIView, DestroyAPIView
 # Create your views here.
 
-class categoryAPIView(APIView):
-    def get(self, request):
-        category = Category.objects.all()
-        serializer = CategorySerializer(category, many=True)
-        return Response (serializer.data)
+# class categoryAPIView(ListAPIView, CreateAPIView):
+class categoryAPIView(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
+    # def get(self, request):
+    #     category = Category.objects.all()  
+    #     serializer = CategorySerializer(category, many=True)
+    #     return Response (serializer.data)
 
-    def post(self, request):
-        serializer = CategorySerializer(data = request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response (serializer.data)
+    # def post(self, request):
+    #     serializer = CategorySerializer(data = request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response (serializer.data)
          
-class Category_detailAPIVIEW(APIView):
-    def get (self, request, pk):
-        category = Category.objects.get(pk=pk)
-        serializer = CategorySerializer(category)
-        return Response (serializer.data)
+# class Category_detailAPIVIEW(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
+class Category_detailAPIVIEW(RetrieveUpdateDestroyAPIView):
+    
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
+    # def get (self, request, pk):
+    #     category = Category.objects.get(pk=pk)
+    #     serializer = CategorySerializer(category)
+    #     return Response (serializer.data)
 
-    def put(self, request, pk):
-        category = Category.objects.get(pk=pk)
-        serializer = CategorySerializer(category, data= request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response (serializer.data)
+    # def put(self, request, pk):
+    #     category = Category.objects.get(pk=pk)
+    #     serializer = CategorySerializer(category, data= request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response (serializer.data)
 
     def delete(self, request, pk):
         category = Category.objects.get(pk=pk)
@@ -39,7 +49,7 @@ class Category_detailAPIVIEW(APIView):
         # if order_item>0:
         #     raise ValueError({'details': 'CANNOT DELETE'})
         category.delete()
-        return Response({"detail": "Data deleted"}, status= status.HTTP_204_No_CONTENT)
+        return Response({"detail": "Data deleted"})
         
     
 
