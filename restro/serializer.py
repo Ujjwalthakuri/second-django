@@ -19,7 +19,9 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ['id']
         
-    def create(self, validated_data):
+    # def save(self, validated_data):
+    def save(self, **kwargs):
+        validated_data = self.validated_data
         # total_number = Category.objects.filter(name = validated_data.get('name')).count()
         total_number = self.Meta.model.objects.filter(name = validated_data.get('name')).count()
         if total_number > 0:
@@ -29,6 +31,6 @@ class CategorySerializer(serializers.ModelSerializer):
         category.save()
         return category
 
-    def update(self, instance, validated_data):
-        return super().update(instance, validated_data)
+    # def update(self, instance, validated_data):
+    #     return super().update(instance, validated_data)
         
