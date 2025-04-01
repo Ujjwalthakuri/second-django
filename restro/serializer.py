@@ -18,3 +18,13 @@ class CategorySerializer(serializers.ModelSerializer):
         # fields = ['id','name']
         fields = '__all__'
         # exclude = ['id']
+        
+    def create(self, validated_data):
+        # total_number = Category.objects.filter(name = validated_data.get('name')).count()
+        total_number = self.Meta.model.objects.filter(name = validated_data.get('name')).count()
+        if total_number > 0:
+            raise serializers.ValidationError("Already exist")
+        
+        category = self.Meta.model(**validated_data)
+        category.save()
+        return category
