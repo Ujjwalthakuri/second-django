@@ -6,8 +6,25 @@ from rest_framework import status
 from .models import *
 from .serializer import *
 from rest_framework.views import APIView
+# from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import GenericAPIView,ListCreateAPIView, ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView,  RetrieveAPIView, UpdateAPIView, DestroyAPIView
 # Create your views here.
+
+class CategoryViewset(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    # def list(self, request):
+    #     category = Category.objects.all()
+    #     serializer = CategorySerializer(category, many=True)
+    #     return Response (serializer.data)
+    
+    # def create(self, request):
+    #     serializer = CategorySerializer(data = request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response (serializer.data)
+        
 
 # class categoryAPIView(ListAPIView, CreateAPIView):
 class categoryAPIView(ListCreateAPIView):
