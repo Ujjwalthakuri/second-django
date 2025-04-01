@@ -28,3 +28,7 @@ class CategorySerializer(serializers.ModelSerializer):
         category = self.Meta.model(**validated_data)
         category.save()
         return category
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+        
