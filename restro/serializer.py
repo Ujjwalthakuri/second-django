@@ -12,7 +12,7 @@ from .models import *
 #         instance.name = validate_data.get('name', instance.name)
 #         instance.save()
 #         return instance
-class CategorySerializer(serializers.ModelSerializer):
+class CataegorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         # fields = ['id','name']
@@ -34,3 +34,16 @@ class CategorySerializer(serializers.ModelSerializer):
     # def update(self, instance, validated_data):
     #     return super().update(instance, validated_data)
         
+    # for food category
+    
+class FoodSerializers(serializers.ModelSerializer):
+    pricetax = serializers.SerializerMethodField()
+    category_id = serializers.StringRelatedField()
+    class Meta:
+        model = Food
+        # fields = ['id','name']
+        # fields = '__all__'
+        fields = ["id", "name", "describe", "price", "pricetax", "category_id"]
+        # exclude = ['id']
+    def get_pricetax(self, food:Food):
+        return food.price*2+food.price

@@ -13,7 +13,7 @@ from rest_framework.generics import GenericAPIView,ListCreateAPIView, ListAPIVie
 
 class CategoryViewset(ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CataegorySerializer
     # def list(self, request):
     #     category = Category.objects.all()
     #     serializer = CategorySerializer(category, many=True)
@@ -29,7 +29,7 @@ class CategoryViewset(ModelViewSet):
 # class categoryAPIView(ListAPIView, CreateAPIView):
 class categoryAPIView(ListCreateAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CataegorySerializer
     
     # def get(self, request):
     #     category = Category.objects.all()  
@@ -46,7 +46,7 @@ class categoryAPIView(ListCreateAPIView):
 class Category_detailAPIVIEW(RetrieveUpdateDestroyAPIView):
     
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CataegorySerializer
     
     # def get (self, request, pk):
     #     category = Category.objects.get(pk=pk)
@@ -101,4 +101,11 @@ class Category_detailAPIVIEW(RetrieveUpdateDestroyAPIView):
 #         #     raise ValidationError({'details': 'CANNOT DELETE'})
 #         category.delete()
 #         return Response({"detail": "Data deleted"}, status= status.HTTP_204_No_CONTENT)
+
+# for food category
+
+class FoodViewset(ModelViewSet):
+    queryset = Food.objects.all()
+    serializer_class = FoodSerializers
+
         
